@@ -1,4 +1,4 @@
-# Start with FastSpeech2 
+- [ ]  Start with FastSpeech2 
 # Then switch to Coqui TTS ??
 # Generate sound by given text
 # Streaming for Instant Responses -> play as it generate 
