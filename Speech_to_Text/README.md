@@ -1,0 +1,2 @@
+-[] It do not clear the previous taken voice inputs while printing.
+-[] Took silences as a "the". Probably model issue.
