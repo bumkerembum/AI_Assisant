@@ -22,6 +22,7 @@ recognizer = vosk.KaldiRecognizer(model, 16000)
 # Queue for processing audio input -> Helps in real-time processing
 audio_queue = queue.Queue()
 
+
 def audio_callback(indata, frames, time, status):
     """Puts the recorded audio into a queue for processing."""
     if status:
@@ -48,11 +49,28 @@ def transcribe_audio():
                     print("You said:", result["partial"])
                 last_time = time.time()
 
+
+def transcribe_audio_from_file(file_path):
+    recognizer = vosk.KaldiRecognizer(model, 16000)
+    with open(file_path, "rb") as f:
+        while True:
+            data = f.read(4000)
+            if len(data) == 0:
+                break
+            if recognizer.AcceptWaveform(data):
+                result = json.loads(recognizer.Result())
+                print(result["text"])
+            else:
+                print(recognizer.PartialResult())
+
+
+transcribe_audio_from_file("C:/Users/Gaming/Downloads/4.3 PTR Preview - Tyrande Whisperwind Voices 0.mp3")
+
 # Run the speech-to-text function
-try:
-    transcribe_audio()
-except KeyboardInterrupt:
-    print("\nStopped.")#
+#try:
+    #transcribe_audio()
+#except KeyboardInterrupt:
+    #print("\nStopped.")#
 
 
 
